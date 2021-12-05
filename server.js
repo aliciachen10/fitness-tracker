@@ -4,6 +4,7 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const Workout = require("../models/workout.js");
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
@@ -21,7 +22,7 @@ db.on("error", error => {
 
 //GET ALL THE WORKOUTS 
 app.get('/api/workouts', (req, res) => {
-  db.workout.find( (err, data) => {
+  db.workout.find({}, (err, data) => {
   if (err) {
     console.log(err); 
   } else {
