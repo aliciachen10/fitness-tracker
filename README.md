@@ -17,7 +17,7 @@ The application is deployed via heroku and can be accessed here: INSERT HEROKU L
 If you wanna be old school, you can ```git clone``` the application, install all packages using ```npm install``` (make sure you have mongodb installed on your machine). Now, run the application: ```node server.js``` or ```nodemon server.js```.
 
 ## what did I use to make this? 
-I used HTML/CSS, Javascript, node.js and express.js for the backend, and MongoDB for the NoSQL database. 
+I used HTML/CSS, Javascript, node.js and express.js for the backend, and MongoDB for the NoSQL database. I created the backend application to add to the existing frontend javascript, HTML and CSS.
 
 ## the application looks something like this: 
 ![image](https://github.com/aliciachen10/fitness-tracker/blob/main/demo.png)
