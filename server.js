@@ -14,27 +14,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-//create database object
-//db, and then the collection name 
-// const db = mongojs("workout", ["workouts"]);
-
 //connect 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
-//report if there is an error as soon as you start index.js
-// db.on("error", error => {
-//   console.log(`Database error: ${error}`)
-// })
-
-//GET ALL THE WORKOUTS 
+//GET THE LATEST WORKOUT 
 app.get('/api/workouts', (req, res) => {
-  Workout.findOne().sort({ day: -1 }).limit(1).exec((err, data) => {
-  if (err) {
-    console.log(err); 
-  } else {
-    res.json(data);
-  }
-})
+  // findOne().sort({ day: -1 }).limit(1).exec(
+  Workout.aggregate([
+      // Grouping pipeline
+      { $addFields: { 
+        totalDuration: { $sum: "$exercises.duration" }
+    }}
+  ]
+).then((workouts) => {res.json(workouts)}).catch((err) => res.json(err))
 })
 
 //GET ALL THE WORKOUTS IN RANGE
@@ -75,7 +67,6 @@ app.post('/api/workouts', (req, res) => {
 })
 })
 
-//db.places.update({country: "Morocco"}, {$push: {majorcities: "Hong Kong" }})
 //UPDATE AN EXISTING RECORD
 app.put('/api/workouts/:id', (req, res) => {
   console.log()
@@ -83,12 +74,11 @@ app.put('/api/workouts/:id', (req, res) => {
   if (err) {
     console.log(err); 
   } else {
-    // console.log("data", data)
     res.json(data);
   }
 })
 })
-//copied id: 61b01f835e5f2521ec2feafc
+
 // GET Route for homepage
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
