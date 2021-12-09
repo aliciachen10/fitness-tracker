@@ -13,7 +13,7 @@ When the user loads the page, can either create a new workout or continue with t
   * View the total duration of each workout from the past seven workouts on the `stats` page.
 
 ## accessing the application
-The application is deployed via heroku and can be accessed here: INSERT HEROKU LINK
+The application is deployed via heroku and can be accessed here: https://floating-lake-95779.herokuapp.com/
 If you wanna be old school, you can ```git clone``` the application, install all packages using ```npm install``` (make sure you have mongodb installed on your machine). Now, run the application: ```node server.js``` or ```nodemon server.js```.
 
 ## what did I use to make this? 
